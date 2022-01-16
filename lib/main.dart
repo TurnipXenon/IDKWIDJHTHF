@@ -2,15 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_travel_ui/models/clothing.dart';
 import 'package:flutter_travel_ui/screens/home_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_travel_ui/screens/add_clothes_screen.dart';
+import 'package:flutter_travel_ui/screens/generic_item_selector_screen.dart';
+import 'package:flutter_travel_ui/screens/home_screen.dart';
+import 'package:flutter_travel_ui/screens/outfit_screen.dart';
 
 Box box;
 Future<void> main() async {
   await Hive.initFlutter();
   box = await Hive.openBox('clothing');
-  Hive.registerAdapter(clothingAdapter());
+  //Hive.registerAdapter(clothingAdapter());
   runApp(MyApp());
 }
 
+// todo(TurnipXenon): remove debug banner
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override

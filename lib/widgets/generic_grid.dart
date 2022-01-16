@@ -1,57 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_travel_ui/models/destination_model.dart';
-import 'package:flutter_travel_ui/screens/destination_screen.dart';
+import 'package:flutter_travel_ui/models/clothing.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class DestinationCarousel extends StatelessWidget {
+// todo(TurnipXenon): optimize / flatten tree
+// todo(TurnipXenon): replace all destination instances
+class GenericGrid extends StatelessWidget {
+  final List<clothing> cloths;
+
+  GenericGrid(this.cloths);
+
   @override
   Widget build(BuildContext context) {
+    int count = 0;
+    if (cloths != null) {
+      count = cloths.length;
+    }
+
     return Column(
       children: <Widget>[
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                'Top Destinations',
-                style: TextStyle(
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.5,
-                ),
-              ),
-              GestureDetector(
-                onTap: () => print('See All'),
-                child: Text(
-                  'See All',
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 1.0,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
         Container(
           height: 300.0,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: destinations.length,
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200,
+                childAspectRatio: 3 / 2,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20),
+            scrollDirection: Axis.vertical,
+            itemCount: count,
             itemBuilder: (BuildContext context, int index) {
-              Destination destination = destinations[index];
+              // todo(TurnipXenon): assertion???
+              clothing cloth = cloths[index];
               return GestureDetector(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => DestinationScreen(
-                      destination: destination,
-                    ),
-                  ),
-                ),
+                onTap: () => {
+                //     Navigator.push(
+                  //   context,
+                  //   // todo(TurnipXenon): replace to go to add clothes reuse that page
+                  //   MaterialPageRoute(
+                  //     builder: (_) => DestinationScreen(
+                  //       destination: Destination(),
+                  //     ),
+                  //   ),
+                  // )
+                },
                 child: Container(
                   margin: EdgeInsets.all(10.0),
                   width: 210.0,
@@ -74,7 +65,7 @@ class DestinationCarousel extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Text(
-                                  '${destination.activities.length} activities',
+                                  '${cloth.tags.length} tags',
                                   style: TextStyle(
                                     fontSize: 22.0,
                                     fontWeight: FontWeight.w600,
@@ -82,7 +73,7 @@ class DestinationCarousel extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  destination.description,
+                                  cloth.category,
                                   style: TextStyle(
                                     color: Colors.grey,
                                   ),
@@ -107,13 +98,14 @@ class DestinationCarousel extends StatelessWidget {
                         child: Stack(
                           children: <Widget>[
                             Hero(
-                              tag: destination.imageUrl,
+                              tag: "assets/images/venice.jpg",
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20.0),
                                 child: Image(
                                   height: 180.0,
                                   width: 180.0,
-                                  image: AssetImage(destination.imageUrl),
+                                  // todo(TurnipXenon): use the data from clothing
+                                  image: AssetImage("assets/images/venice.jpg"),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -125,7 +117,7 @@ class DestinationCarousel extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                    destination.city,
+                                    cloth.category,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 24.0,
@@ -142,7 +134,7 @@ class DestinationCarousel extends StatelessWidget {
                                       ),
                                       SizedBox(width: 5.0),
                                       Text(
-                                        destination.country,
+                                        cloth.category,
                                         style: TextStyle(
                                           color: Colors.white,
                                         ),
