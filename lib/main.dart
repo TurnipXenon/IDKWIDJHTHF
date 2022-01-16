@@ -5,7 +5,13 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_travel_ui/screens/add_clothes_screen.dart';
 import 'package:flutter_travel_ui/screens/generic_item_selector_screen.dart';
 import 'package:flutter_travel_ui/screens/home_screen.dart';
+import 'package:flutter_travel_ui/screens/my_clothes_screen.dart';
 import 'package:flutter_travel_ui/screens/outfit_screen.dart';
+
+
+import 'constraints.dart';
+
+void main() => runApp(MyApp());
 
 Box box;
 Future<void> main() async {
@@ -14,6 +20,7 @@ Future<void> main() async {
   //Hive.registerAdapter(clothingAdapter());
   runApp(MyApp());
 }
+
 
 // todo(TurnipXenon): remove debug banner
 class MyApp extends StatelessWidget {
@@ -24,6 +31,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Travel UI',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
         primaryColor: Color(0xFF3EBACE),
         accentColor: Color(0xFFD8ECF1),
         scaffoldBackgroundColor: Color(0xFFF3F5F7),
