@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_ui/screens/add_clothes_screen.dart';
 import 'package:flutter_travel_ui/screens/generic_item_selector_screen.dart';
 import 'package:flutter_travel_ui/screens/home_screen.dart';
 import 'package:flutter_travel_ui/screens/my_clothes_screen.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         accentColor: Color(0xFFD8ECF1),
         scaffoldBackgroundColor: Color(0xFFF3F5F7),
       ),
-      home: MyClothes(),
+      home: HomeScreen(),
     );
   }
 }
