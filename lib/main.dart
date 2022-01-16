@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_ui/models/clothing.dart';
 import 'package:flutter_travel_ui/screens/home_screen.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() => runApp(MyApp());
+Box box;
+Future<void> main() async {
+  await Hive.initFlutter();
+  box = await Hive.openBox('clothing');
+  Hive.registerAdapter(clothingAdapter());
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
