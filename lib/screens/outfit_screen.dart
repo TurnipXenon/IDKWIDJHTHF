@@ -310,17 +310,17 @@ class _OutfitScreenState extends State<OutfitScreen> {
   }
 
   void _save() {
-    outfit newOutfit = outfit(
-        [
-          topperList[topperIndexNotifier.value],
-          topperList[topIndexNotifier.value],
-          topperList[bagIndexNotifier.value],
-          topperList[bottomIndexNotifier.value],
-          topperList[footwearIndexNotifier.value],
-        ],
-        "todo",
-        []
-    );
+    // outfit newOutfit = outfit(
+    //     [
+    //       topperList[topperIndexNotifier.value],
+    //       topperList[topIndexNotifier.value],
+    //       topperList[bagIndexNotifier.value],
+    //       topperList[bottomIndexNotifier.value],
+    //       topperList[footwearIndexNotifier.value],
+    //     ],
+    //     "todo",
+    //     [],
+    // );
     // todo(TurnipXenon): save here
     // get the clothing via index
     // compile all into list
