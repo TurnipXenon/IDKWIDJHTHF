@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_travel_ui/models/category_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_circle_color_picker/flutter_circle_color_picker.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 
 class AddClothesScreen extends StatefulWidget {
+  final Category categories;
+
+  AddClothesScreen({this.categories});
+
   @override
   _AddClothesScreenState createState() => _AddClothesScreenState();
 }
@@ -19,25 +26,7 @@ class _AddClothesScreenState extends State<AddClothesScreen> {
   File imageFile;
 
   int _selectedIndex = 0;
-  int _currentTab = 0;
-  List<IconData> _icons = [
-    FontAwesomeIcons.tshirt,
-    FontAwesomeIcons.tshirt,
-    FontAwesomeIcons.tshirt,
-    FontAwesomeIcons.tshirt,
-    FontAwesomeIcons.tshirt,
-    FontAwesomeIcons.tshirt,
-    FontAwesomeIcons.tshirt,
-  ];
-  List<String> _text = [
-    'Tshirt',
-    'Pants',
-    'Jacket',
-    'Shoes',
-    'Hats',
-    'Dress',
-    'Blazer'
-  ];
+
 
   Widget _buildIcon(int index) {
     return GestureDetector(
@@ -47,7 +36,7 @@ class _AddClothesScreenState extends State<AddClothesScreen> {
         });
       },
       child: Container(
-        height: 80.0,
+        height: 60.0,
         width: 60.0,
         decoration: BoxDecoration(
           color: _selectedIndex == index
@@ -56,7 +45,7 @@ class _AddClothesScreenState extends State<AddClothesScreen> {
           borderRadius: BorderRadius.circular(30.0),
         ),
         child: Icon(
-          _icons[index],
+          categories[index].icon,
           size: 25.0,
           color: _selectedIndex == index
               ? Theme.of(context).primaryColor
@@ -169,17 +158,24 @@ class _AddClothesScreenState extends State<AddClothesScreen> {
             ),
             SizedBox(height: 10.0),
             Container(
-              height: 60.0,
+              height: 100.0,
               child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: _icons.length,
-                  itemBuilder: (BuildContext context, int index) {
+                scrollDirection: Axis.horizontal,
+                itemCount: categories.length,
+                itemBuilder: (BuildContext context, int index){
                     return Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10.0),
-                        child: _buildIcon(index));
+                        child: Column (
+                            children: <Widget> [
+                              _buildIcon(index),
+                              SizedBox(height: 5.0),
+                              Text(categories[index].categoryName)
+                            ]
+                        )
+                    );
                   }),
             ),
-            SizedBox(height: 20.0),
+            SizedBox(height: 30.0),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: Row(
@@ -197,19 +193,69 @@ class _AddClothesScreenState extends State<AddClothesScreen> {
               ),
             ),
             Container(
-                height: 300,
-                child: Center(
-                  child: CircleColorPicker(
-                    controller: _controller,
-                    onChanged: (color) {
-                      setState(() => _currentColor = color);
-                    },
-                    size: const Size(240, 240),
-                    strokeWidth: 4,
-                    thumbSize: 36,
+              height: 300,
+              child: Center(
+                child: CircleColorPicker(
+                  controller: _controller,
+                  onChanged: (color) {
+                    setState(() => _currentColor = color);
+                  },
+                  size: const Size(240,240),
+                  strokeWidth: 4,
+                  thumbSize: 36,
+                ),
+              )
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    'Tags',
+                    style: TextStyle(
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.5,
+                    ),
                   ),
-                )),
-          ],
+                ],
+              ),
+            ),
+            SizedBox(height: 30.0),
+
+            Column (
+              children: <Widget> [
+                TextButton(
+                    onPressed: () {
+                      Fluttertoast.showToast(
+                          msg: "Clothing Added!",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 2,
+                          backgroundColor: Colors.orange,
+                          textColor: Colors.white,
+                          fontSize: 16.0
+                      );
+                    },
+                    // onPressed: () => Navigator.pop(context) //to navigate back
+                    child: const Text(
+                      'Add',
+                    ),
+                    style: ButtonStyle(
+                        foregroundColor: MaterialStateProperty.all(Colors.white),
+                        backgroundColor: MaterialStateProperty.all(Color(0xFF3EBACE)),
+                        padding: MaterialStateProperty.all(
+                            const EdgeInsets.symmetric(vertical: 20, horizontal: 63)),
+                        textStyle: MaterialStateProperty.all(
+                            const TextStyle(fontSize: 20)))
+                ),
+                SizedBox(height: 20.0),
+
+            ]
+            ),
+
+        ],
         ),
       ),
     );
