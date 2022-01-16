@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_travel_ui/models/category_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_circle_color_picker/flutter_circle_color_picker.dart';
-import 'dart:io';
+import 'dart:html' as html;
+import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -23,7 +24,7 @@ class _AddClothesScreenState extends State<AddClothesScreen> {
     initialColor: Colors.blue,
   );
 
-  File imageFile;
+  var imageFile;
 
   int _selectedIndex = 0;
 
@@ -56,11 +57,10 @@ class _AddClothesScreenState extends State<AddClothesScreen> {
   }
 
   _openGallary(BuildContext context) async {
-    ImagePicker picker = ImagePicker();
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    final pickedFile = await FilePicker.platform.pickFiles();
 
     this.setState(() {
-      imageFile = File(pickedFile.path);
+      imageFile = pickedFile.files.single;
     });
     Navigator.of(context).pop();
   }
@@ -70,7 +70,8 @@ class _AddClothesScreenState extends State<AddClothesScreen> {
     final pickedFile = await picker.getImage(source: ImageSource.camera);
 
     this.setState(() {
-      imageFile = File(pickedFile.path);
+      //imageFile = File(pickedFile.path);
+      imageFile = Null;
     });
     Navigator.of(context).pop();
   }
@@ -103,6 +104,7 @@ class _AddClothesScreenState extends State<AddClothesScreen> {
           );
         });
   }
+
   Widget _decideImageView() {
     if (imageFile == null) {
       return Text('Add Image');
@@ -110,6 +112,7 @@ class _AddClothesScreenState extends State<AddClothesScreen> {
       return Image.file(imageFile, height: 400);
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
