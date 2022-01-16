@@ -1,4 +1,4 @@
-# Untitled App
+# My Closet
 Made by i-dont-know-what-im-doing-just-here-to-have-fun (IDKWIDJHTHF) team
 
 The codebase was forked from (https://github.com/UAlberta-CMPUT401/flutter-boilerplate)[UAlberta-CMPUT401/flutter-boilerplate]
