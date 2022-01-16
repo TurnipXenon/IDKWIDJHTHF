@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_travel_ui/widgets/destination_carousel.dart';
-import 'package:flutter_travel_ui/widgets/hotel_carousel.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_circle_color_picker/flutter_circle_color_picker.dart';
 import 'dart:io';

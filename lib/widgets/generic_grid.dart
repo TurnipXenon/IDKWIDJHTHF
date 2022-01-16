@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_travel_ui/models/clothing.dart';
-import 'package:flutter_travel_ui/models/destination_model.dart';
-import 'package:flutter_travel_ui/screens/destination_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // todo(TurnipXenon): optimize / flatten tree
@@ -34,15 +32,17 @@ class GenericGrid extends StatelessWidget {
               // todo(TurnipXenon): assertion???
               clothing cloth = cloths[index];
               return GestureDetector(
-                onTap: () => Navigator.push(
-                  context,
-                  // todo(TurnipXenon): replace to go to add clothes reuse that page
-                  MaterialPageRoute(
-                    builder: (_) => DestinationScreen(
-                      destination: Destination(),
-                    ),
-                  ),
-                ),
+                onTap: () => {
+                //     Navigator.push(
+                  //   context,
+                  //   // todo(TurnipXenon): replace to go to add clothes reuse that page
+                  //   MaterialPageRoute(
+                  //     builder: (_) => DestinationScreen(
+                  //       destination: Destination(),
+                  //     ),
+                  //   ),
+                  // )
+                },
                 child: Container(
                   margin: EdgeInsets.all(10.0),
                   width: 210.0,
